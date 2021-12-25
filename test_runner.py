@@ -2,9 +2,13 @@ import subprocess
 from os import listdir
 from os.path import isfile, join
 
+# using / for both windows and macos
 TEST_SRC = 'src/s2012s1.py'
 TEST_DATA_PATH = 'test/s2012/s1/'
-PYTHON_VERSION = 'python3'
+# use python or python3 depends on PATH setup
+# for example, in windows, check what's the python path that is added to PATH env variable
+# in macos, check what is added in /usr/local/bin, most of time for python3 is python3
+PYTHON_VERSION = 'python'
 
 
 def setup(path):
