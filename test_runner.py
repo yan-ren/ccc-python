@@ -8,7 +8,7 @@ TEST_DATA_PATH = 'test/s2012/s1/'
 # use python or python3 depends on PATH setup
 # for example, in windows, check what's the python path that is added to PATH env variable
 # in macos, check what is added in /usr/local/bin, most of time for python3 is python3
-PYTHON_VERSION = 'python'
+PYTHON_VERSION = 'python3'
 
 
 def setup(path):
