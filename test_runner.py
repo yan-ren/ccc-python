@@ -3,12 +3,12 @@ from os import listdir
 from os.path import isfile, join
 
 # using / for both windows and macos
-TEST_SRC = 'src/s2012s1.py'
-TEST_DATA_PATH = 'test/s2012/s1/'
+TEST_SRC = "src/j2021j3.py"
+TEST_DATA_PATH = "test/j2021/j3/"
 # use python or python3 depends on PATH setup
 # for example, in windows, check what's the python path that is added to PATH env variable
 # in macos, check what is added in /usr/local/bin, most of time for python3 is python3
-PYTHON_VERSION = 'python3'
+PYTHON_VERSION = "python3"
 
 
 def setup(path):
@@ -20,10 +20,12 @@ def setup(path):
         list: a list of source data file path
     """
     output = []
-    all_files = [join(path, f) for f in listdir(path) if 'in' in f and isfile(join(path, f))]
+    all_files = [
+        join(path, f) for f in listdir(path) if "in" in f and isfile(join(path, f))
+    ]
     all_files.sort()
     for file in all_files:
-        output.append((file, file.replace('.in', '.out')))
+        output.append((file, file.replace(".in", ".out")))
     return output
 
 
@@ -35,11 +37,16 @@ def run(test_script, input_file):
         input_file (string): file path
 
     Returns:
-        CompletedProcess[bytes]: 
-    """    
-    with open(input_file, 'r') as f:
+        CompletedProcess[bytes]:
+    """
+    with open(input_file, "r") as f:
         input_value = f.read()
-    result = subprocess.run([PYTHON_VERSION, test_script], input=input_value.encode('utf-8'), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    result = subprocess.run(
+        [PYTHON_VERSION, test_script],
+        input=input_value.encode("utf-8"),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
     return result
 
 
@@ -53,21 +60,33 @@ def compare(result, output_file, input_file):
 
     Returns:
         bool:
-    """    
-    with open(output_file, 'rb') as f:
+    """
+    with open(output_file, "rb") as f:
         expected_result = f.read()
-    if result.stderr != b'':
-        print('FAIL: test should not returned stderr:', result.stderr, 'input_file:', input_file)
+    if result.stderr != b"":
+        print(
+            "FAIL: test should not returned stderr:",
+            result.stderr,
+            "input_file:",
+            input_file,
+        )
         return False
-    if result.stdout.decode('utf8') == expected_result.decode('utf8'):
-        print('PASS', output_file)
+    if result.stdout.decode("utf8") == expected_result.decode("utf8"):
+        print("PASS", output_file)
         return True
     else:
-        print('FAIL: expected:', expected_result, ' got:', result.stdout, 'input_file:', input_file)
+        print(
+            "FAIL: expected:",
+            expected_result,
+            " got:",
+            result.stdout,
+            "input_file:",
+            input_file,
+        )
         return False
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     test_data_set = setup(TEST_DATA_PATH)
     test_counter = 0
     passed = 0
@@ -79,5 +98,5 @@ if __name__ == '__main__':
             passed += 1
         else:
             failed += 1
-    print('===========================================================')
-    print(f'Run {test_counter} tests, PASS: {passed}, FAILED: {failed}')
+    print("===========================================================")
+    print(f"Run {test_counter} tests, PASS: {passed}, FAILED: {failed}")
