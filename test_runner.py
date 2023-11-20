@@ -3,8 +3,8 @@ from os import listdir
 from os.path import isfile, join
 
 # using / for both windows and macos
-TEST_SRC = "src/j2013j4.py"
-TEST_DATA_PATH = "test/j2013/j4/"
+TEST_SRC = "src/j2023/j5.py"
+TEST_DATA_PATH = "test/j2023/j5/"
 # use python or python3 depends on PATH setup
 # for example, in windows, check what's the python path that is added to PATH env variable
 # in macos, check what is added in /usr/local/bin, most of time for python3 is python3
@@ -71,7 +71,12 @@ def compare(result, output_file, input_file):
             input_file,
         )
         return False
-    if result.stdout.decode("utf8") == expected_result.decode("utf8"):
+
+    # Normalize newline characters to '\n'
+    normalized_result = result.stdout.decode("utf8").replace('\r\n', '\n')
+    normalized_expected = expected_result.decode("utf8").replace('\r\n', '\n')
+
+    if normalized_result == normalized_expected:
         print("PASS", output_file)
         return True
     else:
