@@ -3,8 +3,8 @@ from os import listdir
 from os.path import isfile, join
 
 # using / for both windows and macos
-TEST_SRC = "src/j2022/j5.py"
-TEST_DATA_PATH = "test/j2022/j5/"
+TEST_SRC = "src/junior/j2020/j5_v2.py"
+TEST_DATA_PATH = "test/j2020/j5_s2/"
 # use python or python3 depends on PATH setup
 # for example, in windows, check what's the python path that is added to PATH env variable
 # in macos, check what is added in /usr/local/bin, most of time for python3 is python3
