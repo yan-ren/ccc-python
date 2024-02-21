@@ -1,9 +1,10 @@
 def final_goal(coins):
     config = ''
     for i in range(1, coins+1):
-        config += i + ' '
+        config += str(i) + '|'
 
-    return config.strip()
+    config = config.strip()
+    return config[:len(config) - 1]
 
 def valid_move(start, end):
     if start == ' ':
@@ -12,7 +13,7 @@ def valid_move(start, end):
         return True
     else:
         # the last digit is the coin can be moved
-        return int(start) % 10 < int(end) % 10
+        return (int(start) % 10) < (int(end) % 10)
 
 '''
 This function makes new move string, for example we have '1|2|3' want to move index 1 value to index 2 value, 
@@ -34,19 +35,21 @@ def new_move_string(coins_position, start, end):
         else:
             temp += coin + '|'
 
-    return temp
+    # remove the tailing |
+    return temp[:len(temp) - 1]
 
 
 def make_move(order):
     next_move = set()
     coins_position = order.split('|')
     for i in range(len(coins_position) - 1):
+        copy = coins_position[:]
         # can we move i to i+1?
-        if valid_move(coins_position[i], coins_position[i+1]):
-            next_move = next_move | new_move_string(coins_position, i, i+1)
+        if valid_move(copy[i], copy[i+1]):
+            next_move.add(new_move_string(copy, i, i+1))
         # can we move i+1 to i?
-        elif valid_move(coins_position[i+1], coins_position[i]):
-            next_move = next_move | new_move_string(coins_position, i+1, 1)
+        elif valid_move(copy[i+1], copy[i]):
+            next_move.add(new_move_string(copy, i+1, i))
 
     return next_move
 
@@ -58,8 +61,9 @@ def bfs(current_level, seen, move):
 
     next_level = set()
     seen = seen | current_level
+
     for s in current_level:
-        next_level.add(make_move(s))
+        next_level = next_level | make_move(s)
 
     # if any move in seen already, need to remove from next_level
     next_level = next_level - seen
@@ -78,4 +82,5 @@ while coins != 0:
         print(count)
     else:
         print('IMPOSSIBLE')
+
     coins = int(input())
