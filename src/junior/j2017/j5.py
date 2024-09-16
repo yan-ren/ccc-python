@@ -24,17 +24,8 @@ for i in inputs:
 
 i = 0
 while i < len(wood):
-    # no wood with length i
-    if wood[i] == 0:
-        i += 1
-        continue
-
     j = i
     while j < len(wood):
-        if wood[j] == 0:
-            j += 1
-            continue
-
         # build the board with same length of the wood
         if j == i:
             board[i + j] += wood[i] // 2
@@ -49,9 +40,6 @@ combines = 0
 
 i = 0
 while i < len(board):
-    if board[i] == 0:
-        i += 1
-        continue
     if board[i] > fence_length:
         fence_length = board[i]
         combines = 1
