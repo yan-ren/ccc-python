@@ -4,7 +4,7 @@ original MST, we have undirected weighted graph, find a tree such that contains 
 cost of edges
 
 For the unweighted graph, we can find MST using simple approach by DFS or BFS
-we need to track the edges when we expanding the tree, assign alternate colors
+we need to track the edges when we expand the tree, assign alternate colors
 -> run DFS in unweighted graph and track the edges p
 '''
 import sys
