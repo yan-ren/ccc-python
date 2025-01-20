@@ -1,4 +1,4 @@
-# read first group, create a dictionary that represetn paris should be in the same group
+# read first group, create a dictionary that represents paris should be in the same group
 n = int(input())
 same_group = {}
 while n > 0:
