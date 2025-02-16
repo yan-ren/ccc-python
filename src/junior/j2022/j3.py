@@ -35,8 +35,8 @@ generate_instructions(command)
 
 
 s = "ABCDE"
-s.isalpha() # return true if all characters are alphebet letter a-z(A-Z)
-s.isupper() # return true if all the characters are upper case, numbers, symbolts and spaces are not checked
+s.isalpha() # return true if all characters are alphabet letter a-z(A-Z)
+s.isupper() # return true if all the characters are upper case, numbers, symbols and spaces are not checked
 
 s = "THIS IS 2"
 print(s.isupper())

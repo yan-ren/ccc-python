@@ -27,7 +27,6 @@ else:
 n = int(input())
 
 dp = [[0] * 402 for _ in range(402)]
-prefix_sum = [0] * 402
 ans = 0
 
 arr = list(map(int, input().split()))
@@ -36,10 +35,6 @@ arr = list(map(int, input().split()))
 for i in range(n):
     dp[i][i] = arr[i]
     ans = max(dp[i][i], ans)
-    if i == 0:
-        prefix_sum[i] = arr[i]
-    else:
-        prefix_sum[i] = arr[i] + prefix_sum[i-1]
 
 # dp checks length from 1 to n
 for length in range(1, n):
@@ -52,11 +47,11 @@ for length in range(1, n):
             # sum of left section == sum of right section, and middle part is either a single ball
             # or a valid combination ball
             if dp[left][j-1] and dp[left][j - 1] == dp[k][right] and (j == k or dp[j][k-1]):
-                dp[left][right] = max(dp[left][right], dp[left][j - 1] + dp[j][k-1] + dp[k][right])
+                dp[left][right] = dp[left][j - 1] + dp[j][k-1] + dp[k][right]
                 ans = max(ans, dp[left][right])
                 break
             # cannot merge with current j and k, need to adjust
-            if prefix_sum[j - 1] - (prefix_sum[left - 1] if left > 0 else 0) < prefix_sum[right] - prefix_sum[k - 1]:
+            if dp[left][j - 1] < dp[k][right]:
                 j += 1
             else:
                 k -= 1
