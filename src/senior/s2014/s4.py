@@ -4,7 +4,6 @@ CCC 2014 Senior 4: Tinted Glass Window
 NOTE: This solution is verified with CCC online grader with full marks,
 however if testing on dmoj, two tests will fail with TLE
 
-
 The problem requires calculating the total area of a window that has a tint level
 equal to or exceeding a specified threshold. The window is composed of multiple
 rectangular tinted panels, each contributing to the overall tint level in their
@@ -45,10 +44,6 @@ Key Concepts:
   number of segments or points to consider.
 - Event Sorting: By sorting vertical lines (events), we ensure that updates and
   calculations are performed in the correct order.
-
-This solution demonstrates how geometric problems can be broken down into manageable
-components using techniques like line sweeping and axis compression. It also highlights
-the importance of sorting and efficient data structures in solving complex problems.
 """
 
 N = int(input())
